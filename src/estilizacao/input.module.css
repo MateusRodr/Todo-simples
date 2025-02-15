@@ -1,0 +1,35 @@
+.area {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border: 1px solid #000000;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.area input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #000;
+}
+
+.area .toggleButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #000;
+}
+.form-control {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  

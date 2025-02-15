@@ -1,0 +1,47 @@
+ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 5px 10;
+    border-bottom: 1px solid #ddd;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+  }
+  
+  .todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .todo-item div {
+    display: flex;
+    gap: 10px; 
+  }
+  
+  .input-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .form-control {
+    flex: 1; 
+  }
+  
+  .completed {
+    text-decoration: line-through;
+    color: gray;
+  }
+  button {
+    background-color: transparent; /* Remove cor de fundo */
+    border: none; /* Remove bordas */
+    cursor: pointer; /* Adiciona o cursor de ponteiro */
+    font-size: 1.2em; /* Ajusta o tamanho do emoji */
+  }
+  
+  button:hover {
+    opacity: 0.7; /* Adiciona um efeito de hover opcional */
+  }
+  

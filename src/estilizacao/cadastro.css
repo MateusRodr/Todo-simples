@@ -1,0 +1,41 @@
+.above {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 300px;
+  }
+  
+  .main {
+    background: #fff;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 6px;
+    width: 350px;
+    text-align: center;
+  }
+
+  .form-label{
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    color: gray;
+  }
+
+
+  .form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+  }
+
+  .btn {
+
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
