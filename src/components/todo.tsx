@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 
+
 interface Todo {
   id: string;
   title: string;
@@ -22,6 +23,7 @@ function Todo() {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>("todas");
   const navigate = useNavigate();
+  const API_URL=import.meta.env.VITE_API_URL
 
   const handleUnauthorized = () => {
     localStorage.removeItem('token');
@@ -77,7 +79,7 @@ const fetchTodos = async () => {
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/api/tasks`, {
+    const response = await fetch(`${API_URL}/api/tasks`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -109,7 +111,7 @@ const addTodo = async () => {
   setLoading(true)
 
   try {
-    const response = await fetch(`http://localhost:3000/api/tasks`, {
+    const response = await fetch(`${API_URL}/api/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -160,7 +162,7 @@ const addTodo = async () => {
     setLoading(true); 
 
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks/${todoList[editIndex].id}`, {
+      const response = await fetch(`${API_URL}/api/tasks/${todoList[editIndex].id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -205,7 +207,7 @@ const addTodo = async () => {
     if (!todo) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+      const response = await fetch(`${API_URL}/api/tasks/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -241,7 +243,7 @@ const addTodo = async () => {
   const deleteTask = async (id: string) => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+      const response = await fetch(`${API_URL}/api/tasks/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -279,7 +281,7 @@ const addTodo = async () => {
 
     const searchTask = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/tarefas?status=${filter}`)
+        const response = await fetch(`${API_URL}/tarefas?status=${filter}`)
         const data = await response.json()
         setTodoList(data)
       } catch (error) {
