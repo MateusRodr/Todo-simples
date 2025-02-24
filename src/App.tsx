@@ -7,28 +7,27 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import React from 'react';
-import NotFound from './components';
+import NotFound from './components/'; 
 
 function App() {
-
   const navigate = useNavigate();
-  const Location = useLocation();
+  const location = useLocation(); 
 
   useEffect(() => {
-    const publicRoutes = ['/login', '/cadastro'];
+    const publicRoutes = ['/', '/login']; 
     const token = localStorage.getItem('token');
   
     if(!token && !publicRoutes.includes(location.pathname)){
       navigate('/login');
     }
-  },[location]);
+  }, [location.pathname, navigate]); 
 
   return (
     <Routes>
       <Route path='/todo' element={<Todolist />} />
       <Route path='/' element={<Cadastro />} />
       <Route path='/login' element={<Login />} />
-      <Route path='/*' element={<NotFound />} />
+      <Route path='*' element={<NotFound />} />
     </Routes>
   );
 }
