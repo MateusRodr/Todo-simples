@@ -6,9 +6,6 @@ import { Eye, EyeOff } from 'lucide-react';
 function InputPassword({ value, onChange }: { value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
   const [isShow, setShow] = useState(false);
 
-interface Styles{
-  Styles:string
-}
 
   return (
     <div className={styles.area}>
