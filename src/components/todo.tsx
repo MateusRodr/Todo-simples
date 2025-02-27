@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import * as React from "react";
 import '../estilizacao/todo.css';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
