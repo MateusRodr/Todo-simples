@@ -22,7 +22,7 @@ function Todo() {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>("todas");
   const navigate = useNavigate();
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = (import.meta as any).env.VITE_API_URL;
 
   const handleUnauthorized = () => {
     localStorage.removeItem('token');

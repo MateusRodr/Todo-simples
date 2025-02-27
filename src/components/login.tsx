@@ -5,11 +5,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../estilizacao/login.css';
 import InputPassword from './inputPassword';
 
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string;
+}
+
+interface ImportMeta extends ImportMetaEnv {
+  readonly env: ImportMetaEnv;
+}
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const API_URL=import.meta.env.VITE_API_URL
+  const API_URL = (import.meta as any).env.VITE_API_URL;
+  console.log(API_URL)
 
 
   const handleLogin = async (e: React.FormEvent) => {

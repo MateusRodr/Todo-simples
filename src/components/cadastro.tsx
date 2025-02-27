@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../estilizacao/cadastro.css';
 import InputPassword from './inputPassword';
-const API_URL=import.meta.env.VITE_API_URL 
+const API_URL = (import.meta as any).env.VITE_API_URL;
 
 
 function Cadastro() {
