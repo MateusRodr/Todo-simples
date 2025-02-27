@@ -12,7 +12,7 @@ function InputPassword({ value, onChange }: { value: string; onChange: (e: React
         value={value}
         onChange={onChange}
         placeholder="Digite sua senha"
-        className="form-control" // Adicionando a classe para manter o estilo
+        className="form-control"
         required
       />
 

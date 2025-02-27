@@ -78,7 +78,6 @@ function Todo() {
     }
 
     try {
-      // Ajustado para potencialmente usar o filtro se o backend suportar
       const response = await fetch(`${API_URL}/api/tasks`, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -87,7 +86,6 @@ function Todo() {
       await handleApiResponse(response);
       const data = await response.json();
       
-      // Aplicar o filtro no frontend se o backend não suportar
       let filteredData = data;
       if (filter === "pendentes") {
         filteredData = data.filter((todo: Todo) => !todo.completed);
@@ -97,7 +95,6 @@ function Todo() {
       
       setTodoList(filteredData);
     } catch (error) {
-      // Erro já tratado pelo handleApiResponse
     }
   };
 
