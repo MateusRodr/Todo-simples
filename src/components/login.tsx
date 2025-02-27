@@ -12,7 +12,7 @@ function Login() {
   const navigate = useNavigate();
   
   // Acessando a variável de ambiente diretamente
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, '');
   console.log(API_URL);  // Para verificar se a variável está sendo lida corretamente
 
   const handleLogin = async (e: React.FormEvent) => {
