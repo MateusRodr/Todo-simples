@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../estilizacao/cadastro.css';
 import InputPassword from './inputPassword';
-const API_URL = (import.meta as any).env.VITE_API_URL;
+
 
 
 function Cadastro() {
@@ -17,7 +17,7 @@ function Cadastro() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/api/users`, {
+      const response = await fetch(`https://back-end-todo-demec89mg-mateusrodrs-projects.vercel.app/api/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, name, password }),

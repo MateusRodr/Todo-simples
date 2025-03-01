@@ -23,7 +23,6 @@ function Todo() {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>("todas");
   const navigate = useNavigate();
-  const API_URL = (import.meta as any).env.VITE_API_URL;
 
   const handleUnauthorized = () => {
     localStorage.removeItem('token');
@@ -79,7 +78,7 @@ function Todo() {
     }
 
     try {
-      const response = await fetch(`${API_URL}/api/tasks`, {
+      const response = await fetch(`https://back-end-todo-demec89mg-mateusrodrs-projects.vercel.app/api/tasks`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -118,7 +117,7 @@ function Todo() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/tasks`, {
+      const response = await fetch(`https://back-end-todo-demec89mg-mateusrodrs-projects.vercel.app/api/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -170,7 +169,7 @@ function Todo() {
     setLoading(true); 
 
     try {
-      const response = await fetch(`${API_URL}/api/tasks/${todoList[editIndex].id}`, {
+      const response = await fetch(`https://back-end-todo-demec89mg-mateusrodrs-projects.vercel.app/api/tasks/${todoList[editIndex].id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -209,7 +208,7 @@ function Todo() {
     if (!todo) return;
 
     try {
-      const response = await fetch(`${API_URL}/api/tasks/${id}`, {
+      const response = await fetch(`https://back-end-todo-demec89mg-mateusrodrs-projects.vercel.app/api/tasks/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -239,7 +238,7 @@ function Todo() {
   const deleteTask = async (id: string) => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`${API_URL}/api/tasks/${id}`, {
+      const response = await fetch(`https://back-end-todo-demec89mg-mateusrodrs-projects.vercel.app/api/tasks/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

@@ -12,13 +12,12 @@ function Login() {
   const navigate = useNavigate();
   
   // Acessando a variável de ambiente diretamente
-  const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, '');
-  console.log(API_URL);  // Para verificar se a variável está sendo lida corretamente
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/api/auth/login`, {
+      const url = new URL('https://back-end-todo-demec89mg-mateusrodrs-projects.vercel.app/api/auth/login', ).toString();
+      console.log('Final URL:', url);
+     const response = await fetch(url, {  
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
