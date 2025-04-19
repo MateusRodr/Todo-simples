@@ -1,47 +1,139 @@
+.btn-group {
+  margin: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-active {
+  background-color: #e0e0e0;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 6px 12px;
+}
+
+.btn-inactive {
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 6px 12px;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 12px 45px 12px 12px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1em;
+  background: #f1f1f1;
+}
+
+.input-container .add-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: green;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+h3 {
+  margin-top: 20px;
+  font-size: 1.5em;
+}
+
 ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    padding: 5px 10;
-    border-bottom: 1px solid #ddd;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: large;
-  }
-  
-  .todo-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .todo-item div {
-    display: flex;
-    gap: 10px; 
-  }
-  
-  .input-group {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .form-control {
-    flex: 1; 
-  }
-  
-  .completed {
-    text-decoration: line-through;
-    color: gray;
-  }
-  button {
-    background-color: transparent; /* Remove cor de fundo */
-    border: none; /* Remove bordas */
-    cursor: pointer; /* Adiciona o cursor de ponteiro */
-    font-size: 1.2em; /* Ajusta o tamanho do emoji */
-  }
-  
-  button:hover {
-    opacity: 0.7; /* Adiciona um efeito de hover opcional */
-  }
-  
+  list-style: none;
+  padding: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: large;
+}
+
+li {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-item div {
+  display: flex;
+  gap: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #333;
+  transition: opacity 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+.btn {
+  padding: 8px 16px;
+  font-weight: bold;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.btn-todas {
+  background-color: #0d6efd;
+  border-radius: 5px;
+}
+
+button.btn-pendentes {
+  background-color: #ffc107;
+  color: black;
+  border-radius: 5px;
+}
+
+button.btn-completas {
+  background-color: #198754;
+  border-radius: 5px;
+}
+
+button.btn-todas,
+button.btn-pendentes,
+button.btn-completas {
+  transition: background-color 0.3s ease;
+}
+
+button.btn-todas:hover {
+  background-color: #0b5ed7; 
+}
+
+button.btn-pendentes:hover {
+  background-color: #e0ac07;
+}
+
+button.btn-completas:hover {
+  background-color: #157347; 
+}
