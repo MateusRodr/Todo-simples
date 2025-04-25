@@ -24,3 +24,20 @@
     background-color: #f2f4f3;
   }
   
+  body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    height: 100%;
+    width: 100%;
+  }
+  
+  

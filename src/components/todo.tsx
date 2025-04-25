@@ -1,9 +1,7 @@
-import { useState } from "react";
-import * as React from "react";
-import '../estilizacao/todo.css';
-import Swal from 'sweetalert2';
-import { useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
+import "../estilizacao/todo.css";
+import React from "react";
 
 interface Todo {
   id: string;
@@ -11,26 +9,44 @@ interface Todo {
   completed: boolean;
 }
 
+type ThemeMode = "claro" | "escuro";
 
 function Todo() {
   const [todoList, setTodoList] = useState<Todo[]>([]);
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>("todas");
-
+  const [darkMode, setDarkMode] = useState<ThemeMode>("claro");
 
   useEffect(() => {
-    const savedTodos = localStorage.getItem('todos');
-    if(savedTodos){
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos) {
       setTodoList(JSON.parse(savedTodos));
     }
-  },[])
-  
+
+    const savedTheme = localStorage.getItem("theme") as ThemeMode;
+    if (savedTheme) {
+      setDarkMode(savedTheme);
+    }
+  }, []);
+
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todoList));
+    localStorage.setItem("todos", JSON.stringify(todoList));
   }, [todoList]);
+
+  useEffect(() => {
+    localStorage.setItem("theme", darkMode);
+
+    // Aplica a classe ao body
+    document.body.classList.remove("dark-theme", "light-theme");
+    document.body.classList.add(darkMode === "escuro" ? "dark-theme" : "light-theme");
+  }, [darkMode]);
+
+  const handleTheme = () => {
+    setDarkMode((prev) => (prev === "claro" ? "escuro" : "claro"));
+  };
 
   const addTodo = () => {
     if (!inputValue.trim()) {
@@ -90,14 +106,14 @@ function Todo() {
   };
 
   const toggleComplete = (id: string) => {
-    const updatedList = todoList.map(todo =>
+    const updatedList = todoList.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
     setTodoList(updatedList);
   };
 
   const deleteTask = (id: string) => {
-    const updatedList = todoList.filter(todo => todo.id !== id);
+    const updatedList = todoList.filter((todo) => todo.id !== id);
     setTodoList(updatedList);
     Swal.fire({
       title: "Tarefa Excluída!",
@@ -105,7 +121,7 @@ function Todo() {
     });
   };
 
-  const filteredTodos = todoList.filter(todo => {
+  const filteredTodos = todoList.filter((todo) => {
     if (filter === "pendentes") return !todo.completed;
     if (filter === "completas") return todo.completed;
     return true;
@@ -113,75 +129,79 @@ function Todo() {
 
   return (
     <>
-<h1>To-Do List</h1>
+      <button className="theme-toggle" onClick={handleTheme}>
+        {darkMode === "escuro" ? "🌙 Modo Escuro" : "☀️ Modo Claro"}
+      </button>
 
-<div className="btn-group" role="group" aria-label="Basic example">
-  <button
-    className={`btn btn-todas ${filter === 'todas' ? '' : 'btn-inactive'}`}
-    onClick={() => setFilter("todas")}
-  >
-    Todas
-  </button>
-  <button
-    className={`btn btn-pendentes ${filter === 'pendentes' ? '' : 'btn-inactive'}`}
-    onClick={() => setFilter("pendentes")}
-  >
-    Pendentes
-  </button>
-  <button
-    className={`btn btn-completas ${filter === 'completas' ? '' : 'btn-inactive'}`}
-    onClick={() => setFilter("completas")}
-  >
-    Completas
-  </button>
-</div>
+      <h1>To-Do List</h1>
 
-<section className="section1">
-  <div className="input-container">
-    <input
-      className="form-control"
-      type="text"
-      placeholder="📝Digite sua tarefa ..."
-      value={inputValue}
-      onChange={({ target }) => setInputValue(target.value)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') {
-          isEditing ? updateTask() : addTodo();
-          return e.preventDefault();
-        }
-      }}
-    />
-    <button
-      type="button"
-      className="add-btn"
-      onClick={isEditing ? updateTask : addTodo}
-      disabled={loading}
-    >
-      {loading ? '...' : (isEditing ? '💾' : '+')}
-    </button>
-  </div>
-</section>
+      <div className="btn-group">
+        <button
+          className={`btn btn-todas ${filter === "todas" ? "" : "btn-inactive"}`}
+          onClick={() => setFilter("todas")}
+        >
+          Todas
+        </button>
+        <button
+          className={`btn btn-pendentes ${filter === "pendentes" ? "" : "btn-inactive"}`}
+          onClick={() => setFilter("pendentes")}
+        >
+          Pendentes
+        </button>
+        <button
+          className={`btn btn-completas ${filter === "completas" ? "" : "btn-inactive"}`}
+          onClick={() => setFilter("completas")}
+        >
+          Completas
+        </button>
+      </div>
 
-<section>
-  <h3>
-    {filter === 'pendentes'
-      ? 'Todas as tarefas pendentes:'
-      : filter === 'completas'
-      ? 'Todas as tarefas concluídas:'
-      : 'Todas as tarefas:'}
-  </h3>
+      <section className="section1">
+        <div className="input-container">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="📝Digite sua tarefa ..."
+            value={inputValue}
+            onChange={({ target }) => setInputValue(target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                isEditing ? updateTask() : addTodo();
+                e.preventDefault();
+              }
+            }}
+          />
+          <button
+            type="button"
+            className="add-btn"
+            onClick={isEditing ? updateTask : addTodo}
+            disabled={loading}
+          >
+            {loading ? "..." : isEditing ? "💾" : "+"}
+          </button>
+        </div>
+      </section>
+
+      <section>
+        <h3>
+          {filter === "pendentes"
+            ? "Todas as tarefas pendentes:"
+            : filter === "completas"
+            ? "Todas as tarefas concluídas:"
+            : "Todas as tarefas:"}
+        </h3>
 
         <ul>
           {filteredTodos.map((todo, index) => (
             <li key={todo.id}>
               <div className="todo-item">
-                <span className={todo.completed ? 'completed' : ''}>
+                <span className={todo.completed ? "completed" : ""}>
                   {todo.title}
                 </span>
                 <div>
                   <button onClick={() => editTask(index)}>✏️</button>
                   <button onClick={() => toggleComplete(todo.id)}>
-                    {todo.completed ? '⬜' : '✔️'}
+                    {todo.completed ? "⬜" : "✔️"}
                   </button>
                   <button onClick={() => deleteTask(todo.id)}>❌</button>
                 </div>
@@ -189,13 +209,11 @@ function Todo() {
             </li>
           ))}
         </ul>
-        {todoList.length === 0 && (
-          <p>✨ Sem tarefas! Adicione uma nova. </p>
-        )}
+
+        {todoList.length === 0 && <p>✨ Sem tarefas! Adicione uma nova.</p>}
       </section>
     </>
   );
 }
 
 export default Todo;
-
